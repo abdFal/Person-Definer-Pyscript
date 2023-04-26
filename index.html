@@ -1,0 +1,134 @@
+<html>
+
+<head>
+
+<title>
+
+HTML Forms with PyScript     
+    
+</title>
+
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+</head>
+
+<style>
+
+    body{
+      padding: 3rem 8rem;
+      font-family: 'Poppins';
+    }
+    .title, #date{
+      width: 100%;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    #date{
+      font-size: 14px;
+    }
+    input[type=text], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 9px;
+      box-sizing: border-box;
+    }
+    input[type=text]:focus{
+      animation: glow 800ms ease-out infinite alternate;
+      border-color: #232787;
+      box-shadow: 0 0 5px #232787, inset 0 0 3px #232787,
+        0 1px 0 #4c4faf;
+      outline: none;
+    }
+    .submit-sec{
+      display: flex;
+      justify-content: center;
+    }
+    input[type=submit] {
+      width: 30%;
+      background-color: #4c4faf;
+      color: white;
+      padding: 8px 12px;
+      margin: 8px auto;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #5bbc7e;
+    }
+    
+    p {
+      border-radius: 5px;
+      background-color: #f2ffed;
+      padding: 20px;
+    }
+    #output{
+      padding: 10px 20px;
+      border-radius: 0;
+    }
+    </style>
+
+<body>
+    <h1 class="title">Person Indicator</h1>
+    <py-script>
+        import time
+
+        # Get the current date in dd/mm/yyyy format
+        now = time.strftime("%A, %d %m %Y")
+
+        # Output the date to the HTML page
+        Element('date').write(f"Jakarta, {now}")
+</py-script>
+
+<h2 id="date"></h2>
+
+
+    <form onsubmit="return false">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" placeholder="Your Name..." required><br>
+
+        <label for="countries">Country:</label>
+        <select name="countries" id="countries">
+            <option value="Indonesia">Indonesia</option>
+            <option value="Germany">Germany</option>
+            <option value="Africa"><Strong>Africa</Strong></option>
+            <option value="Netherlands">Netherlands</option>
+        </select>
+
+        <label for="genders">Gender:</label>
+        <select name="genders" id="genders">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+<div class="submit-sec">
+        <input pys-onClick="sub" type="submit" id="btn-form" value="Define">
+</div>
+
+    </form> 
+ 
+    <p>Result:</p>
+    <p id = 'output'></p>
+    <py-script>
+
+        def sub(*args,**kwargs):
+            result_place = Element('output')
+            gender = Element('genders').value
+            country = Element('countries').value
+            if country == 'Africa':
+                result_place.write(f"{Element('name').value} is a very black shiny person from {Element('countries').value}")
+            elif gender == 'Male':
+                result_place.write(f"{Element('name').value} is a handsome boy from {Element('countries').value}")
+            else:
+                result_place.write(f"{Element('name').value} is a beautiful girl from {Element('countries').value}")
+    
+    </py-script>
+
+</body>
+</html>
